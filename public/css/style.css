@@ -67,7 +67,7 @@ body {
 .f-info-socialmedia i:hover {
     color: #fe424d;
 }
-.card{
+.listing-card{
     border:none !important;
     margin-bottom: 2rem;
 }
