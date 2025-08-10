@@ -9,17 +9,18 @@
         <div class="card col-6 offset-2 show-card offset-3">
             <img src="<%=individualListing.image.url%>" class="card-img-top show-image" alt="listing_image">
             <div class="card-body">
-                <p class="card-text"> <br>
-                    <%=individualListing.description%> <br>
-                        &#8377;<%=individualListing.price.toLocaleString("en-IN") %> <br>
-                            <%=individualListing.location%> <br>
-                                <%=individualListing.country%> <br>
-                </p>
+            <p class="card-text"> <br> Owner: <i><%= individualListing.owner.username%></i><br></p>
+              <p class="card-text"><%=individualListing.description%> <br> </p>
+              <p class="card-text"> &#8377;<%=individualListing.price.toLocaleString("en-IN") %> <br> </p>
+              <p class="card-text">  <%=individualListing.location%> <br></p>
+              <p class="card-text" > <%=individualListing.country%> <br></p>
             </div>
         </div>
         <div>
             <br>
-            <div class="btns">
+
+            
+            <div class="btns">                
                 <a href="/listings/edit/<%=individualListing._id%>"
                     class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
                 <form method="post" action="/listings/<%=individualListing._id%>?_method=DELETE">
@@ -27,6 +28,7 @@
                 </form>
                 <form method="get" action="/listings"><button class="btn btn-dark offset-8">back</button></form>
             </div>
+             
 
             <div class="col-8 offset-3 mt-3 mb-3">
                 <hr>
