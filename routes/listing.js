@@ -75,7 +75,7 @@ router.get("/new", isLoggedIn, wrapAsync(async (req, res) => {
 //route for showing details of a particular id
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let individualListing = await Listing.findById(id).populate("reviews").populate("owner");
+    let individualListing = await Listing.findById(id).populate({path: "reviews", populate : {path:"author"}}).populate("owner");
     if(!individualListing){
         req.flash("error", "the item u want to access is deleted!");
         res.redirect("/listings");
