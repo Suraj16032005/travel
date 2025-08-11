@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const { listingSchema } = require("../schema");
 const Schema = mongoose.Schema;
 const Review=require("./review.js");
+
+
+
 const ListingSchema = new Schema({
   title: { type: String, required: true },
   description: String,
