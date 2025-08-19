@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();  // load .env only in development
+}
+
+
 const express = require("express"); ///used for parsing, giving responses
 const session = require('express-session');
 const app = express();  // Ye function:

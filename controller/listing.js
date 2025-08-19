@@ -2,7 +2,7 @@ const Listing=require("../models/listing");
 
 module.exports.index= async (req, res) => {
     const alllistings = await Listing.find();
-    console.log(alllistings);
+    // console.log(alllistings);
     res.render("listings/alllistings.ejs", { alllistings });
 };
 
@@ -23,9 +23,13 @@ module.exports.showListing= async (req, res) => {
 };
 
 module.exports.newListing= async (req, res, next) => {
+    let url=req.file.path;
+    let filename=req.file.filename;
+    console.log(url,"..",filename);
     const listing = req.body.listing;
     const newListing = new Listing(listing);
     newListing.owner=req.user._id;
+    newListing.image={url,filename};
     await newListing.save();
     req.flash("success","A new listing has been created!");
     res.redirect("/listings");
