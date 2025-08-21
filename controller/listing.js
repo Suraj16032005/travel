@@ -34,31 +34,30 @@ module.exports.newListing= async (req, res, next) => {
     res.redirect("/listings");
 };
 
-module.exports.renderEditListing=async (req, res) => {
-    let { title, description, price, location, country } = req.body.listing;
+module.exports.updateListing=async (req, res) => {
     let { id } = req.params;
-    console.log("Updating with data:", req.body.listing);
-    let updated = await Listing.findByIdAndUpdate(id, {
-        title: title,
-        description: description,
-        price: price,
-        location: location,
-        country: country
-    });
-
-    console.log(updated);
+    let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing });
+    if(typeof req.file !=="undefined"){
+    let url=req.file.path;
+    let filename=req.file.filename;
+    listing.image={url, filename};
+    await listing.save();
+    }
     req.flash("success","Updated data!");
     res.redirect(`/listings/${id}`);
 };
 
-module.exports.updateListing=async (req, res) => {
+module.exports.renderEditListing=async (req, res) => {
+    
     let { id } = req.params;
     let EditList = await Listing.findById(id);
     if(!EditList){
         req.flash("error", "the item u want to access is deleted!");
         res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { EditList });
+    let originalUrl=listing.image.url;
+    originalUrl=originalUrl.replace("/upload","upload/w_250");
+    res.render("listings/edit.ejs", { EditList,originalUrl });
 };
 
 module.exports.deleteListing=async (req, res) => {

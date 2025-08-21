@@ -18,9 +18,9 @@ router.get("/new", isLoggedIn, wrapAsync(listingController.renderNewForm));
 
 router.route("/:id")
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing))
-  .put(isLoggedIn, isOwner, validateListing, wrapAsync(listingController.renderEditListing))
+  .put(isLoggedIn, isOwner,upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing))
   .get(wrapAsync(listingController.showListing));
 
-router.get("/edit/:id", isLoggedIn, isOwner, wrapAsync(listingController.updateListing));
+router.get("/edit/:id", isLoggedIn, isOwner, wrapAsync(listingController.renderEditListing));
 
 module.exports=router;
